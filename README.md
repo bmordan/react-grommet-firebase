@@ -1,6 +1,6 @@
 # React Grommet Firebase
 
-![]()
+![A log in form](https://user-images.githubusercontent.com/4499581/100378928-f51ca200-300b-11eb-94a1-0c62e92e23fa.png)
 
 ### `yarn start`
 
