@@ -14,3 +14,6 @@ Sign in as Tom
 
 username: tom@sky.com
 password: 123123
+
+VIDEO PART 1: [https://youtu.be/vFfOnPZQagQ](https://youtu.be/vFfOnPZQagQ)
+VIDEO PART 2: [https://youtu.be/8hSQO4ai418](https://youtu.be/8hSQO4ai418)
