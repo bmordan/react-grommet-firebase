@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState, useEffect} from 'react'
+import { Grommet, Header, Main } from 'grommet'
+import theme from './theme.json'
+import Login from './Login'
+import RestaurantsPage from './RestaurantsPage'
+import RestaurantPage from './RestaurantPage'
+import { A, useRoutes } from 'hookrouter'
+import { User } from './models'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const routes = {
+  "/": () => <Login />,
+  "/restaurants": () => <RestaurantsPage />,
+  "/restaurants/:id": ({ id }) => <RestaurantPage id={id} />
 }
 
+function App() {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const unsubscribe = User.onAuth(setUser)
+    return () => unsubscribe()
+  }, [])
+
+  return (
+    <Grommet theme={theme}>
+      <Header background="brand" pad="medium" justify="start">
+        <A href="/">My App</A> <A href="/restaurants">Restaurants</A>
+        {user ? <span onClick={() => User.signOut()}>Signout</span> : null}
+      </Header>
+      <Main pad="medium" direction="column" align="center">
+        {useRoutes(routes)}
+      </Main>
+    </Grommet>
+  )
+}
 export default App;
+
+/**
+ * 
+<A href="/"><Button primary label="My Restaurant App" /></A>
+<A href="/restaurants"><Button primary label="All Restaurants" /></A>
+ */
